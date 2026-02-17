@@ -1,65 +1,164 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect, useState } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  Play,
+} from "lucide-react";
+import { MainNav } from "@/components/MainNav";
+import { WhyChooseUsSection } from "../components/WhyChooseUsSection";
+import { FeaturedDestinationsSection } from "../components/FeaturedDestinationsSection";
+import { TestimonialsSection } from "../components/TestimonialsSection";
+import { CallToActionSection } from "../components/CallToActionSection";
+
+const HERO_IMAGES = [
+  "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600", // Tropical beach
+  "https://images.pexels.com/photos/210307/pexels-photo-210307.jpeg?auto=compress&cs=tinysrgb&w=1600", // Mountain lake
+  "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=1600", // City skyline
+];
+
+export default function HomePage() {
+  const [scrollY, setScrollY] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Auto-rotate hero background images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const parallaxStyle: React.CSSProperties = {
+    transform: `translate3d(0, ${scrollY * 0.25}px, 0)`,
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? HERO_IMAGES.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <main className="relative min-h-screen bg-black text-white">
+      <section className="relative isolate h-screen overflow-hidden">
+        {/* Parallax Background Slider */}
+        <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+          {HERO_IMAGES.map((image, index) => (
+            <div
+              key={image}
+              className={`hero-bg absolute inset-0 will-change-transform transition-opacity duration-700 ${
+                index === activeIndex ? "opacity-100" : "opacity-0"
+              }`}
+              style={{
+                backgroundImage: `url('${image}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                ...parallaxStyle,
+              }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
-    </div>
+
+        {/* Overlays for readability */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+
+        {/* Nav */}
+        <MainNav active="home" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex h-full flex-col px-10 pb-10 pt-24 md:flex-row md:items-center md:pb-16 md:pt-32">
+          {/* Left content */}
+          <div className="max-w-xl space-y-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300/80">
+              Your journey begins here
+            </p>
+
+            <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+              Discover the World&apos;s{" "}
+              <span className="text-amber-300">Most Exquisite</span>{" "}
+              Destinations
+            </h1>
+
+            <p className="max-w-lg text-sm text-white/80 md:text-base">
+              Experience luxury travel redefined. From pristine beaches to
+              ancient wonders, we craft bespoke journeys that transform your
+              dreams into unforgettable memories.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button className="btn-primary">
+                <span>Book an Appointment</span>
+              </button>
+
+              <button className="btn-outline-light">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-amber-300">
+                  <Play className="ml-0.5 h-4 w-4" />
+                </span>
+                <span>Explore Destinations</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right side slider controls */}
+          <div className="pointer-events-none relative mt-10 hidden flex-1 items-center justify-end md:mt-0 md:flex">
+            <div className="pointer-events-auto flex flex-col items-center gap-6">
+              <button className="slider-arrow" onClick={handlePrev}>
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button className="slider-arrow" onClick={handleNext}>
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom center slider indicators */}
+          <div className="pointer-events-none absolute bottom-16 left-1/2 flex -translate-x-1/2 items-center gap-3">
+            {HERO_IMAGES.map((_, index) => (
+              <button
+                key={index}
+                className={`pointer-events-auto slider-dot ${
+                  index === activeIndex ? "slider-dot-active" : ""
+                }`}
+                onClick={() => setActiveIndex(index)}
+              />
+            ))}
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="pointer-events-none absolute bottom-10 left-10 flex items-center gap-3 text-xs text-white/70">
+            <div className="scroll-indicator">
+              <span className="scroll-indicator-dot" />
+            </div>
+            <span className="flex items-center gap-1 tracking-[0.3em] uppercase">
+              Scroll
+              <ChevronDown className="h-3 w-3" />
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <WhyChooseUsSection />
+      <FeaturedDestinationsSection />
+      <TestimonialsSection />
+      <CallToActionSection />
+    </main>
   );
 }
