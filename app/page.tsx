@@ -1,13 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  Play,
-} from "lucide-react";
-import { MainNav } from "@/components/MainNav";
+import { ChevronLeft, ChevronRight, ChevronDown, Play } from "lucide-react";
+import { MainNav } from "../components/MainNav";
 import { WhyChooseUsSection } from "../components/WhyChooseUsSection";
 import { FeaturedDestinationsSection } from "../components/FeaturedDestinationsSection";
 import { TestimonialsSection } from "../components/TestimonialsSection";

@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Faraday Travels and Tours ",
+  title: "FocusEscape Travels and Tours ",
   description: "A pleasant Journey begins with us",
+  icons: {
+    icon: "/assets/FE Logo .png",
+  },
 };
 
 export default function RootLayout({

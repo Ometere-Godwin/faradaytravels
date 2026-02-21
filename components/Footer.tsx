@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export function Footer() {
@@ -7,10 +9,15 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.4fr)]">
           {/* Brand + intro */}
           <div className="space-y-5">
-            <div className="text-2xl font-semibold tracking-tight">
-              <span className="text-white">Focus</span>
-              <span className="text-amber-400">Escape</span>
-            </div>
+            <Link href="/" className="block w-fit">
+              <Image
+                src="/assets/FE Logo .png"
+                alt="Focus Escape Travel and Tour"
+                width={200}
+                height={48}
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
             <p className="max-w-xs text-sm text-slate-200/90">
               Crafting extraordinary journeys for discerning travelers. Experience the
               world&apos;s most captivating destinations with our bespoke travel services.
