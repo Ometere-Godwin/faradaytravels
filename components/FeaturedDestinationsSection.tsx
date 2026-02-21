@@ -16,7 +16,7 @@ const DESTINATIONS = [
       "https://images.pexels.com/photos/1430677/pexels-photo-1430677.jpeg?auto=compress&cs=tinysrgb&w=1600", // Santorini
     country: "Greece",
     title: "Santorini Escape",
-    priceLabel: "$3,200",
+    priceLabel: "$3,700",
     description:
       "Romance and breathtaking views in the Mediterranean, from cliffside sunsets to hidden coves.",
   },
@@ -25,7 +25,7 @@ const DESTINATIONS = [
       "https://images.pexels.com/photos/2403209/pexels-photo-2403209.jpeg?auto=compress&cs=tinysrgb&w=1600", // Bali rice fields
     country: "Indonesia",
     title: "Bali Retreat",
-    priceLabel: "$2,800",
+    priceLabel: "$2,900",
     description:
       "Serenity and spirituality in tropical paradise, nestled among lush rice terraces and temples.",
   },
@@ -57,4 +57,3 @@ export function FeaturedDestinationsSection() {
     </section>
   );
 }
-
