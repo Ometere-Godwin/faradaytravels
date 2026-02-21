@@ -64,8 +64,7 @@ export const DESTINATIONS: readonly Destination[] = [
       {
         dayLabel: "Day 3",
         title: "Full Safari Day",
-        description:
-          "Morning and afternoon game drives seeking the Big Five.",
+        description: "Morning and afternoon game drives seeking the Big Five.",
       },
       {
         dayLabel: "Day 4",
@@ -76,8 +75,7 @@ export const DESTINATIONS: readonly Destination[] = [
       {
         dayLabel: "Day 5",
         title: "Migration Viewing",
-        description:
-          "Track the Great Migration with expert Maasai guides.",
+        description: "Track the Great Migration with expert Maasai guides.",
       },
       {
         dayLabel: "Day 6",
@@ -185,5 +183,18 @@ export const DESTINATIONS: readonly Destination[] = [
     durationLabel: "4–7 Days",
     rating: 4.7,
   },
+  {
+    id: "mali-adventure",
+    categoryId: "romance",
+    imageUrl:
+      "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    country: "France",
+    title: "Paris Romantic Getaway",
+    priceLabel: "$3,400",
+    description:
+      "Sunset Seine cruises, Michelin-star dining, and strolls past iconic Parisian landmarks.",
+    categoryLabel: "Romance",
+    durationLabel: "4–7 Days",
+    rating: 4.7,
+  },
 ] as const;
-
