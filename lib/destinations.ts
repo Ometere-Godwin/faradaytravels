@@ -195,6 +195,6 @@ export const DESTINATIONS: readonly Destination[] = [
       "Sunset Seine cruises, Michelin-star dining, and strolls past iconic Parisian landmarks.",
     categoryLabel: "Romance",
     durationLabel: "4–7 Days",
-    rating: 4.7,
+    rating: 4.0,
   },
 ] as const;
