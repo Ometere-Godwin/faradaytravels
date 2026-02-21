@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ProcessSection } from "@/components/ProcessSection";
-import { MainNav } from "@/components/MainNav";
+import { MainNav } from "../../components/MainNav";
 
 const SERVICES = [
   {
@@ -62,7 +62,11 @@ const SERVICES = [
       "Bespoke travel plans designed around your preferences, interests, and travel dreams.",
     longDescription:
       "No two journeys are the same. We design fully custom itineraries that reflect your interests, pace, and style of travel—ensuring every day feels intentional, effortless, and inspiring.",
-    included: ["Personalized Planning", "Local Experiences", "Flexible Scheduling"],
+    included: [
+      "Personalized Planning",
+      "Local Experiences",
+      "Flexible Scheduling",
+    ],
     highlights: [
       "End-to-end trip management",
       "On-trip adjustments when needed",
@@ -283,9 +287,7 @@ export default function ServicesPage() {
             of a lifetime.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-            <button className="btn-primary">
-              Book an Appointment
-            </button>
+            <button className="btn-primary">Book an Appointment</button>
             <button className="inline-flex items-center justify-center rounded-full border border-amber-400 px-6 py-3 text-sm font-semibold text-amber-300 transition hover:bg-amber-300 hover:text-slate-900">
               Request a Custom Tour
             </button>
@@ -362,4 +364,3 @@ export default function ServicesPage() {
     </main>
   );
 }
-

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "FocusEscape Travels and Tours ",
   description: "A pleasant Journey begins with us",
   icons: {
-    icon: "/assets/FE Logo .png",
+    icon: [{ url: "/favicon-icon.png", type: "image/png", sizes: "32x32" }],
   },
 };
 

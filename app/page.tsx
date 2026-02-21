@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, ChevronDown, Play } from "lucide-react";
 import { MainNav } from "../components/MainNav";
 import { WhyChooseUsSection } from "../components/WhyChooseUsSection";
@@ -99,16 +100,16 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button className="btn-primary">
+              <Link href="/contact" className="btn-primary">
                 <span>Book an Appointment</span>
-              </button>
+              </Link>
 
-              <button className="btn-outline-light">
+              <Link href="/destinations" className="btn-outline-light">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-amber-300">
                   <Play className="ml-0.5 h-4 w-4" />
                 </span>
                 <span>Explore Destinations</span>
-              </button>
+              </Link>
             </div>
           </div>
 
