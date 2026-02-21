@@ -29,6 +29,15 @@ const DESTINATIONS = [
     description:
       "Serenity and spirituality in tropical paradise, nestled among lush rice terraces and temples.",
   },
+  {
+    imageUrl:
+      "https://images.pexels.com/photos/1430677/pexels-photo-1430677.jpeg?auto=compress&cs=tinysrgb&w=1600", // Bali rice fields
+    country: "Indonesia",
+    title: "Mali Retreat",
+    priceLabel: "$6,900",
+    description:
+      "Serenity and spirituality in tropical paradise, nestled among lush rice terraces and temples.",
+  },
 ];
 
 export function FeaturedDestinationsSection() {
