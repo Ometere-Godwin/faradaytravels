@@ -18,7 +18,7 @@ const TESTIMONIALS: Testimonial[] = [
       "https://images.pexels.com/photos/2403209/pexels-photo-2403209.jpeg?auto=compress&cs=tinysrgb&w=1600",
     quote:
       "Focus Escape transformed our honeymoon into a fairy tale. Every detail was perfect, from the private villa in Bali to the surprise candlelit dinner on the beach.",
-    name: "Amelia & James Carter",
+    name: "Richard and Sonia Iyayi",
     location: "Bali Retreat, Indonesia",
   },
   {
@@ -26,7 +26,7 @@ const TESTIMONIALS: Testimonial[] = [
       "https://images.pexels.com/photos/1430677/pexels-photo-1430677.jpeg?auto=compress&cs=tinysrgb&w=1600",
     quote:
       "We felt like celebrities in Santorini. The cliffside views, yacht cruise, and curated dining experiences were beyond anything we imagined.",
-    name: "Sophia Martinez",
+    name: "Ngozi Adeche-Oyem",
     location: "Santorini Escape, Greece",
   },
   {
@@ -34,7 +34,7 @@ const TESTIMONIALS: Testimonial[] = [
       "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1600",
     quote:
       "Our African safari was seamless from start to finish. Expert guides, luxurious tents, and wildlife encounters that left us speechless.",
-    name: "David & Lauren King",
+    name: "David & Joseph King",
     location: "African Safari, Kenya & Tanzania",
   },
   {
@@ -42,7 +42,7 @@ const TESTIMONIALS: Testimonial[] = [
       "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=1600",
     quote:
       "From the moment we landed, everything was handled. The city tours, rooftop dinners, and cultural experiences were perfectly paced.",
-    name: "Michael Chen",
+    name: "Michael Ogunbawo",
     location: "European City Lights Tour",
   },
   {
@@ -50,7 +50,7 @@ const TESTIMONIALS: Testimonial[] = [
       "https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&w=1600",
     quote:
       "The team anticipated our needs before we even expressed them. It was the most relaxed we’ve ever felt on vacation.",
-    name: "Isabella Rossi",
+    name: "Isabella Ikpa",
     location: "Amalfi Coast Getaway, Italy",
   },
 ];
@@ -67,9 +67,7 @@ export function TestimonialsSection() {
   }, []);
 
   const goPrev = () => {
-    setIndex((prev) =>
-      prev === 0 ? TESTIMONIALS.length - 1 : prev - 1
-    );
+    setIndex((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));
   };
 
   const goNext = () => {
@@ -168,4 +166,3 @@ export function TestimonialsSection() {
     </section>
   );
 }
-

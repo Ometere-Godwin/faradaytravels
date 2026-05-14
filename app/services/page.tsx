@@ -55,7 +55,7 @@ const SERVICES = [
     id: "itineraries",
     categoryId: "experiences",
     imageUrl:
-      "https://images.pexels.com/photos/106155/pexels-photo-106155.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg?auto=compress&cs=tinysrgb&w=1600",
     label: "Planning",
     title: "Custom Itineraries",
     shortDescription:
@@ -287,10 +287,15 @@ export default function ServicesPage() {
             of a lifetime.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-            <button className="btn-primary">Book an Appointment</button>
-            <button className="inline-flex items-center justify-center rounded-full border border-amber-400 px-6 py-3 text-sm font-semibold text-amber-300 transition hover:bg-amber-300 hover:text-slate-900">
+            <Link href="/contact" className="btn-primary">
+              Book an Appointment
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-amber-400 px-6 py-3 text-sm font-semibold text-amber-300 transition hover:bg-amber-300 hover:text-slate-900"
+            >
               Request a Custom Tour
-            </button>
+            </Link>
           </div>
         </div>
       </section>

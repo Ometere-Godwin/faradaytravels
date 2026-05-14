@@ -24,12 +24,16 @@ export function MainNav({ active }: MainNavProps) {
       />
       <div className="fixed inset-y-0 right-0 z-[9999] flex w-full max-w-xs flex-col border-l border-white/10 bg-[#0b3a56]/98 backdrop-blur-md md:hidden">
         <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-6 py-4">
-          <Link href="/" className="block shrink-0" onClick={() => setMobileMenuOpen(false)}>
+          <Link
+            href="/"
+            className="block shrink-0"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <Image
-              src="/assets/FE Logo .png"
+              src="/assets/FE_LOGO.png"
               alt="Focus Escape Travel and Tour"
-              width={160}
-              height={40}
+              width={200}
+              height={48}
               className="h-8 w-auto object-contain"
             />
           </Link>
@@ -96,7 +100,7 @@ export function MainNav({ active }: MainNavProps) {
     <header className="relative z-10 flex items-center justify-between px-10 pt-6 text-sm">
       <Link href="/" className="block shrink-0">
         <Image
-          src="/assets/FE Logo .png"
+          src="/assets/FE_LOGO.png"
           alt="Focus Escape Travel and Tour"
           width={200}
           height={48}

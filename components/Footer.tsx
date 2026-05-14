@@ -11,7 +11,7 @@ export function Footer() {
           <div className="space-y-5">
             <Link href="/" className="block w-fit">
               <Image
-                src="/assets/FE Logo .png"
+                src="/assets/FE_LOGO.png"
                 alt="Focus Escape Travel and Tour"
                 width={200}
                 height={48}
@@ -19,22 +19,39 @@ export function Footer() {
               />
             </Link>
             <p className="max-w-xs text-sm text-slate-200/90">
-              Crafting extraordinary journeys for discerning travelers. Experience the
-              world&apos;s most captivating destinations with our bespoke travel services.
+              Crafting extraordinary journeys for discerning travelers.
+              Experience the world&apos;s most captivating destinations with our
+              bespoke travel services.
             </p>
             <div className="flex items-center gap-3 text-slate-200/80">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100">
+              <Link
+                href="https://web.facebook.com/profile.php?id=61587498003192"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100"
+                aria-label="Facebook"
+              >
                 f
-              </div>
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100">
+              </Link>
+              <Link
+                href="https://www.instagram.com/focusescapetravel"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100"
+                aria-label="LinkedIn"
+              >
                 in
-              </div>
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100">
+              </Link>
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100"
+                aria-label="Instagram"
+              >
                 ig
-              </div>
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100">
+              </Link>
+              <Link
+                href="#"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-100"
+                aria-label="X"
+              >
                 X
-              </div>
+              </Link>
             </div>
           </div>
 
@@ -78,7 +95,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-amber-400" />
-                <span>hello@focusescape.com</span>
+                <span>focusescape21st@gmail.com</span>
               </div>
             </div>
           </div>
@@ -87,14 +104,17 @@ export function Footer() {
 
       <div className="border-t border-slate-700/60 bg-[#082a3f] py-4 text-[11px] text-slate-300">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 md:flex-row md:px-12">
-          <p>© 2026 Focus Escape Travel and Tour Limited. All rights reserved.</p>
+          <p>
+            © 2026 Focus Escape Travel and Tour Limited. All rights reserved.
+          </p>
           <div className="flex gap-4">
             <button className="text-slate-200/85">Privacy Policy</button>
-            <button className="text-slate-200/85">Terms &amp; Conditions</button>
+            <button className="text-slate-200/85">
+              Terms &amp; Conditions
+            </button>
           </div>
         </div>
       </div>
     </footer>
   );
 }
-

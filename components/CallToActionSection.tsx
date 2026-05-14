@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function CallToActionSection() {
   return (
     <section className="bg-[#f3f2eb] py-16 text-white md:py-20">
@@ -11,8 +13,7 @@ export function CallToActionSection() {
               </p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
                 Ready to Create{" "}
-                <span className="text-amber-300">Unforgettable</span>{" "}
-                Memories?
+                <span className="text-amber-300">Unforgettable</span> Memories?
               </h2>
               <p className="mt-4 text-sm text-slate-100/90 md:text-base">
                 Let our expert travel consultants design your perfect escape.
@@ -21,12 +22,18 @@ export function CallToActionSection() {
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-4">
-                <button className="btn-primary">
-                  Book an Appointment
-                </button>
-                <button className="inline-flex items-center justify-center rounded-full border border-amber-400 px-6 py-3 text-sm font-semibold text-amber-300 transition hover:bg-amber-300 hover:text-slate-900">
+                <Link href="/contact" className="btn-primary">
+                  <span>Book an Appointment</span>
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center rounded-full border border-amber-400 px-6 py-3 text-sm font-semibold text-amber-300 transition hover:bg-amber-300 hover:text-slate-900"
+                >
+                  <span>Plan My Trip</span>
+                </Link>
+                {/* <button className="inline-flex items-center justify-center rounded-full border border-amber-400 px-6 py-3 text-sm font-semibold text-amber-300 transition hover:bg-amber-300 hover:text-slate-900">
                   Plan My Trip
-                </button>
+                </button> */}
               </div>
             </div>
 
@@ -71,4 +78,3 @@ export function CallToActionSection() {
     </section>
   );
 }
-

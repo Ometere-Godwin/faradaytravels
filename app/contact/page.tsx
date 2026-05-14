@@ -1,17 +1,99 @@
 "use client";
 
-import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { MainNav } from "@/components/MainNav";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function ContactPage() {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email: "",
+    phone_number: "",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (
+      !formData.full_name.trim() ||
+      !formData.email.trim() ||
+      !formData.phone_number.trim() ||
+      !formData.message.trim()
+    ) {
+      toast({
+        title: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+    setSubmitting(true);
+    //   try {
+    //     await supabase.from("focus_travel_contact").insert;
+    //     toast({
+    //       title: "Thank you!",
+    //       description:
+    //         "We've received your message and will get back to you shortly.",
+    //     });
+    //     setFormData({
+    //       full_name: "",
+    //       email: "",
+    //       phone_number: "",
+    //       message: "",
+    //     });
+    //   } catch (err) {
+    //     const error = err as Error;
+    //     console.error("Error submitting contact form:", error);
+    //     toast({
+    //       title: "Submission failed",
+    //       description: error.message || "Something went wrong. Please try again.",
+    //       variant: "destructive",
+    //     });
+    //   } finally {
+    //     setSubmitting(false);
+    //   }
+    // };
+    try {
+      const { error } = await supabase.from("focus_travel_contact").insert([
+        {
+          full_name: formData.full_name,
+          email: formData.email,
+          phone_number: formData.phone_number,
+          message: formData.message,
+        },
+      ]);
+      console.log("data", error);
+
+      if (error) throw error;
+
+      toast({
+        title: "Thank you!",
+        description:
+          "We've received your support inquiry and will be in touch soon.",
+      });
+      setFormData({ full_name: "", email: "", phone_number: "", message: "" });
+    } catch (err) {
+      const error = err as Error;
+      console.error("Error submitting support form:", error);
+      toast({
+        title: "Submission Failed",
+        description:
+          error.message || "Failed to submit inquiry. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      {/* Hero */}
       <section className="relative isolate overflow-hidden bg-[#0b3a56] text-white">
         <MainNav active="contact" />
 
-        {/* Hero copy */}
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-6 px-10 pb-20 pt-20 md:pb-24 md:pt-24">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-300">
             Contact Us
@@ -27,10 +109,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact content */}
       <section className="bg-[#f3f2eb] pb-24 pt-12 text-slate-900 md:pt-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:px-12">
-          {/* Left: text */}
           <div className="space-y-4 text-sm leading-relaxed text-slate-700 md:text-base">
             <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
               Get in Touch
@@ -46,23 +126,24 @@ export default function ContactPage() {
               <div className="flex items-start gap-3">
                 <MapPin className="mt-1 h-4 w-4 text-amber-500" />
                 <span>
-                  123 Travel Street, Suite 100
+                  2 Mike Ogunka street Rukpakulusi new layout, Airforce-Eliozu,
+                  Port Harcourt, Rivers State
                   <br />
                   Lagos, Nigeria
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-amber-500" />
-                <span>+234 123 456 7890</span>
+                <span>+2348067445131</span>
+                <span>+2347066619001</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-amber-500" />
-                <span>hello@focusescape.com</span>
+                <span>focusescape21st@gmail.com</span>
               </div>
             </div>
           </div>
 
-          {/* Right: form */}
           <div className="rounded-3xl bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.08)] md:p-8">
             <h3 className="text-base font-semibold text-slate-900 md:text-lg">
               Send Us a Message
@@ -71,15 +152,24 @@ export default function ContactPage() {
               Fill out the form below and we&apos;ll get back to you shortly.
             </p>
 
-            <form className="mt-5 space-y-4 text-sm">
+            <form
+              className="mt-5 space-y-4 text-sm"
+              onSubmit={handleSubmit}
+              noValidate
+            >
               <div className="space-y-1.5">
                 <label className="block text-xs font-medium text-slate-700">
                   Full Name
                 </label>
                 <input
                   type="text"
+                  value={formData.full_name}
+                  onChange={(e) =>
+                    setFormData((d) => ({ ...d, full_name: e.target.value }))
+                  }
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none ring-0 focus:border-[#0b3a56] focus:ring-2 focus:ring-[#0b3a56]/20"
                   placeholder="Enter your name"
+                  autoComplete="name"
                 />
               </div>
               <div className="space-y-1.5">
@@ -88,8 +178,13 @@ export default function ContactPage() {
                 </label>
                 <input
                   type="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData((d) => ({ ...d, email: e.target.value }))
+                  }
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none ring-0 focus:border-[#0b3a56] focus:ring-2 focus:ring-[#0b3a56]/20"
                   placeholder="you@example.com"
+                  autoComplete="email"
                 />
               </div>
               <div className="space-y-1.5">
@@ -98,8 +193,13 @@ export default function ContactPage() {
                 </label>
                 <input
                   type="tel"
+                  value={formData.phone_number}
+                  onChange={(e) =>
+                    setFormData((d) => ({ ...d, phone_number: e.target.value }))
+                  }
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none ring-0 focus:border-[#0b3a56] focus:ring-2 focus:ring-[#0b3a56]/20"
                   placeholder="+234..."
+                  autoComplete="tel"
                 />
               </div>
               <div className="space-y-1.5">
@@ -108,12 +208,20 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   rows={4}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData((d) => ({ ...d, message: e.target.value }))
+                  }
                   className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none ring-0 focus:border-[#0b3a56] focus:ring-2 focus:ring-[#0b3a56]/20"
                   placeholder="Tell us about your ideal trip..."
                 />
               </div>
-              <button type="submit" className="btn-primary mt-2 w-full">
-                Send Message
+              <button
+                type="submit"
+                className="btn-primary mt-2 w-full disabled:opacity-60"
+                disabled={submitting}
+              >
+                {submitting ? "Sending…" : "Send Message"}
               </button>
             </form>
           </div>
@@ -122,4 +230,3 @@ export default function ContactPage() {
     </main>
   );
 }
-
