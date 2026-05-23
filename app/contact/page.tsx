@@ -4,7 +4,6 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import { MainNav } from "@/components/MainNav";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function ContactPage() {
   const { toast } = useToast();
@@ -31,57 +30,31 @@ export default function ContactPage() {
       return;
     }
     setSubmitting(true);
-    //   try {
-    //     await supabase.from("focus_travel_contact").insert;
-    //     toast({
-    //       title: "Thank you!",
-    //       description:
-    //         "We've received your message and will get back to you shortly.",
-    //     });
-    //     setFormData({
-    //       full_name: "",
-    //       email: "",
-    //       phone_number: "",
-    //       message: "",
-    //     });
-    //   } catch (err) {
-    //     const error = err as Error;
-    //     console.error("Error submitting contact form:", error);
-    //     toast({
-    //       title: "Submission failed",
-    //       description: error.message || "Something went wrong. Please try again.",
-    //       variant: "destructive",
-    //     });
-    //   } finally {
-    //     setSubmitting(false);
-    //   }
-    // };
     try {
-      const { error } = await supabase.from("focus_travel_contact").insert([
-        {
-          full_name: formData.full_name,
-          email: formData.email,
-          phone_number: formData.phone_number,
-          message: formData.message,
-        },
-      ]);
-      console.log("data", error);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const json = (await res.json()) as { error?: string };
 
-      if (error) throw error;
+      if (!res.ok) {
+        throw new Error(json.error ?? "Failed to submit message");
+      }
 
       toast({
         title: "Thank you!",
         description:
-          "We've received your support inquiry and will be in touch soon.",
+          "We've received your message and will be in touch soon.",
       });
       setFormData({ full_name: "", email: "", phone_number: "", message: "" });
     } catch (err) {
       const error = err as Error;
-      console.error("Error submitting support form:", error);
+      console.error("Error submitting contact form:", error);
       toast({
-        title: "Submission Failed",
+        title: "Submission failed",
         description:
-          error.message || "Failed to submit inquiry. Please try again.",
+          error.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {

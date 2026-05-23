@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { DestinationCard } from "@/components/DestinationCard";
 import { DESTINATIONS } from "@/lib/destinations";
@@ -16,7 +15,6 @@ const DESTINATION_CATEGORIES = [
 ] as const;
 
 export default function DestinationsPage() {
-  const router = useRouter();
   const [activeCategoryId, setActiveCategoryId] =
     useState<string>("all");
 
@@ -79,9 +77,7 @@ export default function DestinationsPage() {
             {visibleDestinations.map((destination) => (
               <DestinationCard
                 key={destination.id}
-                onExplore={() =>
-                  router.push(`/destinations/${destination.id}`)
-                }
+                exploreHref={`/destinations/${destination.id}`}
                 {...destination}
               />
             ))}

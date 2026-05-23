@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { CalendarDays, MapPin, Star } from "lucide-react";
 
 interface DestinationCardProps {
@@ -10,6 +11,8 @@ interface DestinationCardProps {
   categoryLabel?: string;
   durationLabel?: string;
   rating?: number;
+  /** When set, the primary CTA navigates here (preferred over `onExplore`). */
+  exploreHref?: string;
   onExplore?: () => void;
 }
 
@@ -22,6 +25,7 @@ export function DestinationCard({
   categoryLabel,
   durationLabel,
   rating,
+  exploreHref,
   onExplore,
 }: DestinationCardProps) {
   return (
@@ -84,14 +88,24 @@ export function DestinationCard({
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={onExplore}
-          className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#0b3a56] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0c4568]"
-        >
-          Explore Tour
-          <span className="ml-1">→</span>
-        </button>
+        {exploreHref ? (
+          <Link
+            href={exploreHref}
+            className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#0b3a56] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0c4568]"
+          >
+            Explore Tour
+            <span className="ml-1">→</span>
+          </Link>
+        ) : (
+          <button
+            type="button"
+            onClick={onExplore}
+            className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#0b3a56] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0c4568]"
+          >
+            Explore Tour
+            <span className="ml-1">→</span>
+          </button>
+        )}
       </div>
     </article>
   );

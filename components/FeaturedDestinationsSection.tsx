@@ -1,35 +1,20 @@
+import Link from "next/link";
+import { DESTINATIONS } from "@/lib/destinations";
 import { SectionHeader } from "./SectionHeader";
 import { DestinationCard } from "./DestinationCard";
 
-const DESTINATIONS = [
-  {
-    imageUrl:
-      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1600", // African safari
-    country: "Kenya & Tanzania",
-    title: "African Safari",
-    priceLabel: "$4,500",
-    description:
-      "Witness the majesty of the wild in luxury tented camps beneath endless African skies.",
-  },
-  {
-    imageUrl:
-      "https://images.pexels.com/photos/1430677/pexels-photo-1430677.jpeg?auto=compress&cs=tinysrgb&w=1600", // Santorini
-    country: "Greece",
-    title: "Santorini Escape",
-    priceLabel: "$3,700",
-    description:
-      "Romance and breathtaking views in the Mediterranean, from cliffside sunsets to hidden coves.",
-  },
-  {
-    imageUrl:
-      "https://images.pexels.com/photos/2403209/pexels-photo-2403209.jpeg?auto=compress&cs=tinysrgb&w=1600", // Bali rice fields
-    country: "Indonesia",
-    title: "Bali Retreat",
-    priceLabel: "$2,900",
-    description:
-      "Serenity and spirituality in tropical paradise, nestled among lush rice terraces and temples.",
-  },
-];
+/** Same trio as the first entries in `DESTINATIONS` — single source of truth. */
+const FEATURED_DESTINATION_IDS = [
+  "african-safari",
+  "santorini-escape",
+  "bali-retreat",
+] as const;
+
+const FEATURED_DESTINATIONS = FEATURED_DESTINATION_IDS.map((id) => {
+  const d = DESTINATIONS.find((item) => item.id === id);
+  if (!d) throw new Error(`Unknown destination id: ${id}`);
+  return d;
+});
 
 export function FeaturedDestinationsSection() {
   return (
@@ -43,14 +28,21 @@ export function FeaturedDestinationsSection() {
             align="left"
           />
 
-          <button className="btn-outline-light text-slate-900 hover:text-slate-900">
+          <Link
+            href="/destinations"
+            className="btn-outline-light inline-flex text-slate-900 hover:text-slate-900"
+          >
             <span>View All Destinations</span>
-          </button>
+          </Link>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {DESTINATIONS.map((destination) => (
-            <DestinationCard key={destination.title} {...destination} />
+          {FEATURED_DESTINATIONS.map((destination) => (
+            <DestinationCard
+              key={destination.id}
+              exploreHref={`/destinations/${destination.id}`}
+              {...destination}
+            />
           ))}
         </div>
       </div>
